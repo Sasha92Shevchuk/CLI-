@@ -5,20 +5,40 @@ const contacts = require("./contacts");
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "listContact":
-      const allContacts = await contacts.listContacts();
-      return console.table(allContacts);
+      try {
+        const allContacts = await contacts.listContacts();
+        return console.table(allContacts);
+      } catch (error) {
+        console.error("Failed to list contacts:", error);
+      }
+      break;
 
     case "getContactById":
-      const oneContact = await contacts.getContactById(id);
-      return console.log(oneContact);
+      try {
+        const oneContact = await contacts.getContactById(id);
+        return console.log(oneContact);
+      } catch (error) {
+        console.error("Failed to get contact by ID:", error);
+      }
+      break;
 
     case "addContact":
-      const newContact = await contacts.addContact({ name, email, phone });
-      return console.log(newContact);
+      try {
+        const newContact = await contacts.addContact({ name, email, phone });
+        return console.log(newContact);
+      } catch (error) {
+        console.error("Failed to add contact:", error);
+      }
+      break;
 
     case "removeContact":
-      const removeContact = await contacts.removeContact(id);
-      return console.log(removeContact);
+      try {
+        const removeContact = await contacts.removeContact(id);
+        return console.log(removeContact);
+      } catch (error) {
+        console.error("Failed to remove contact:", error);
+      }
+      break;
 
     default:
       return console.warn("Unknown action type!");
